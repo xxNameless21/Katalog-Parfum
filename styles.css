@@ -17,6 +17,18 @@
   box-sizing: border-box;
 }
 
+.btn {
+  padding: 0.50rem 1.00rem;
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--white);
+  background-image: var(--gradient-2);
+  outline: none;
+  border: none;
+  border-radius: 5rem;
+  cursor: pointer;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
+}
 
 /* --- Reset & Dasar --- */
 * {
@@ -35,7 +47,7 @@ body {
 /* --- Navbar --- */
 .navbar {
   background-color: #6a0dad; /* Warna Ungu Utama */
-  padding: 15px 0;
+  padding: 20px 0;
   color: white;
   box-shadow: 0 2px 5px rgba(0,0,0,0.1);
   position: sticky;
