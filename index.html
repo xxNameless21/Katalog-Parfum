@@ -53,6 +53,7 @@
     const ChevronUp = ({ size = 24, className = "" }) => <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><path d="m18 15-6-6-6 6"/></svg>;
     const ChevronDown = ({ size = 24, className = "" }) => <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><path d="m6 9 6 6 6-6"/></svg>;
     const ChevronLeft = ({ size = 24, className = "" }) => <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><path d="m15 18-6-6 6-6"/></svg>;
+    const ChevronRight = ({ size = 24, className = "" }) => <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><path d="m9 18 6-6-6-6"/></svg>;
     const ShoppingBag = ({ size = 24, className = "" }) => <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>;
     const ShoppingCart = ({ size = 24, className = "" }) => <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/></svg>;
     const SearchIcon = ({ size = 24, className = "" }) => <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>;
@@ -66,8 +67,10 @@
     const Landmark = ({ size = 24, className = "" }) => <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><line x1="3" x2="21" y1="22" y2="22"/><line x1="6" x2="6" y1="18" y2="11"/><line x1="10" x2="10" y1="18" y2="11"/><line x1="14" x2="14" y1="18" y2="11"/><line x1="18" x2="18" y1="18" y2="11"/><polygon points="12 2 20 7 4 7"/></svg>;
     const Copy = ({ size = 24, className = "" }) => <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>;
     const Sparkles = ({ size = 24, className = "" }) => <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/></svg>;
+    const Star = ({ size = 24, className = "" }) => <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="currentColor" className={className}><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>;
+    const MessageCircle = ({ size = 24, className = "" }) => <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><path d="m3 21 1.9-5.7a8.5 8.5 0 1 1 3.8 3.8z"/></svg>;
 
-    // --- DATA KATALOG & HARGA (Dengan Desain Premium) ---
+    // --- DATA KATALOG & HARGA ---
     const catalogData = {
       'Abu-Abu': { colorClass: 'bg-gradient-to-br from-slate-500 to-slate-700', textColor: 'text-white', items: ['ARIANA GRANDE CANDY LIKE SWEET LIMITED EDITION', 'BAHAR THE SPIRIT OF DUBAI UNISEX', 'BODY SHOP WHITE MUSK', 'BVLGARI AQUA', 'BVLGARI AQUA AMARA', 'BVLGARI AQUA MARINE', 'BVLGARI RAIN MAN ESSENSE MAN', 'CENDANA', 'CH 212 HEROES 2021', 'CH 212 MAN', 'CH 212 SEXY MAN', 'CHANEL NO.5', 'CHRISTIAN DIOR SAUVAGE', 'CREED AVENTUS', 'DE MARLY LAYTON UNISEX', 'Dior Sauvage New Edition 2025', 'ERMENEGILDO ZEGNA ESSENCE FLORENTINE IRIS', 'ESTEE LAUDER MODERN MUSE LE ROUGE', 'GIORGIO ARMANI ACQUADIGIO ABSOLUTE', 'GUCCI BLOOM INTENSE', 'JAGUAR PACE', 'JPG WOMAN', 'KILLIAN MUSK OUD', 'LOUIS VUITTON CALIFORNIA DREAM UNISEX', 'LOUIS VUITTON COEUR BATTANT', 'LOUIS VUITTON FLEUR DE DESSERT UNISEX', 'LOUIS VUITTON PASIFIC CHILL UNISEX', 'MAISON MARGIELA ON A DATE 2022', 'Maison Margiella By The Fireplace', 'MANCERA AMBER FEVER', 'MANGO ADORABLY', 'MNG CUT FOR WOMAN', 'MONTALE PARIS INTENSE', 'MONTALE ROSE MUSK', 'Reef 31', 'ROJA DOVE ELYSIUM COLOGNE POUR HOME MAN', 'SALVATORE FERRAGMO INTENSE LEATHER', 'TAMBURINS CHAMO 2022', 'TOM FORD FUCKING FABULOUS', 'TOMFORD NOIR EXTREM PARFUME', 'Waffle Vanilla Ice Cream', 'XERJOF (ALEXANDRIA II) UNISEX', 'YSL KOUROS'] },
       'Biru Muda': { colorClass: 'bg-gradient-to-br from-sky-400 to-blue-600', textColor: 'text-white', items: ['ABERCROMBIE & FITCH FIRST INSTINCT UNISEX', 'AIGNER IN LEATHER MAN', 'ANNA SUI FLIGHT OF FANCY', 'ANNICK GOUTAL PETITE CHERIE', 'ARIANA GRANDE CLOUD PINK', 'ARMANI TERRA DIGIO', 'AZZARO THE MOST WANTED', 'BATH & BODY WORKS BE JOYFULL', 'BATH & BODY WORKS MAD ABOUT YOU', 'BATH & BODY WORKS BEAUTIFUL DAY', 'BURBERRY HER LONDON DREAM', 'BVLGARI AQUA ATLANTIQUE', 'BVLGARI EXTREME', 'BVLGARI JASMINE', 'BVLGARI OMNIA BY MARY KATRANZOU', 'BVLGARI ROSE ESSENTIAL', 'BY REDO GIPSY WATER UNISEX', 'CH 212 VIP MEN WINS', 'CH KINGS', 'CHACAREL YES IM PINK FIRST', 'CHRISTIAN DIOR DUNE MAN', 'CHRISTIAN DIOR MISS DIOR BLOOMING BOUQUET', 'CHRISTIAN DIOR MISS DIOR ROSE N ROSES', 'CHRISTIAN DIOR TOBACOLOR', 'CK ONE 1994', 'D&G THE ONE GENTLEMAN', 'DAHNAL OOD SUPER', 'DE MARLEY DELINA', 'DIOR BY DIOR BONNE ETOILLE BABY UNISEX', 'DIOR HOLLY PEONY WOMAN', 'DIPTYQUE DO SON EDP UNISEX', 'DIPTYQUE TAM DAO EDP UNISEX', 'DUNHILL SIGNATURE COLLECTION BRITISH LEATHER', 'DYPTIQUE FEU DE BOIS', 'ELLIE SAAB 2018 GIRL OF NOW SHINE', 'ESCADA CANDY LOVE', 'ESCADA SORBERTO ROSO', 'GIORGIO ARMANI MY WAY NECTAR', 'GIORGIO ARMANI SI INTENSE 2021', 'GIORGIO ARMANI THE YULONG UNISEX', 'GIORGIO EMPORIO ARMANI STRONG WITH YOU AMBER UNISEX', 'GUCCI BAMBOO', 'HUGO BOSS BOTTLED', 'HUGO BOSS ENERGIZE', 'HUGO BOSS IN MOTION ELECTRIC', 'JHON VARVATOS ARTISAN', 'JLO MIAMI GLOW', 'JO MALONE BRONZE WOOD&LEATHER COLOGNE INTENS', 'JO MALONE RED HIBISCUS', 'JO MALONE ROSE & MAGNOLIA COLOGNE 2024 WOMAN', 'JPG SCANDAL BY NIGHT', 'KILLIAN PRINCESS WOMAN', 'LACOSTE MATCH POINT MEN', 'LANCOME IDOLE', 'LOUIS VUITTON DANCING BLOSSOM UNISEX', 'LOUIS VUITTON ETOILE FILANTE WOMAN', 'LOUIS VUITTON ON THE BEACH UNISEX', 'LOUIS VUITTON SYMPHONY UNISEX', 'MAISON FRANCIS KURKDIJAN FLUIDITY GENTLE GOLD UNISEX', 'MAISON MARGIELA JAZZ CLUB MAN', 'MARC JACOB PERFECT 2020', 'MERCEDES SIGN', 'MONTBLANC EXPLORE PLATINUM', 'MOSCHINO TOY 2 PEARL 2023', 'NADINE WINATA', 'Nagita Slavina', 'PACO RABANNE FAME', 'PACO RABANNE OLYMPEA SOLAR 2022', 'PENHALIGON ELLENSIA', "PENHALIGON'S BABYLON 2019", 'PERY ELIS 360 WOMAN', 'PRADA INFUSION THE MANDARIN', 'RALPH LAUREN POLO DOUBLE BLACK', 'RALPH LAUREN POLO SAFARI', 'ROJA DOVE ELYSIUM POUR HOMME COLOGNE 2017', 'Rose Noir by Ahmed Al Maghribi', 'SALVATORE FERAGAMO MAN', 'SALVATORE FERRAGAMO GIARDINI DI SETA UNISEX', 'SALVATORE FERRAGAMO SIGNORINA', 'SALVATORE FERRAGAMO UOMO URBAN FEEL', 'SANTAL 33 BY LE LABO', 'SEMIRAMIS', 'SERIBU BUNGA', 'TOM FORD OMBRE LEATHER PARFUM', 'VALENTINO ABSULO', 'VERSACE EROS MAN', "VICTORIA'S SECRET ANGEL GOLD", "VICTORIA'S SECRET CANDY NOIR TEASE", "VICTORIA'S SECRET EAU SO SEXY", 'Waffle Vanilla Caramel', 'YSL MYSELF', 'YSL TUXEDO'] },
@@ -86,6 +89,13 @@
       'Hitam': { 'STANDAR': { '35': 95000, '60': 150000, '100': 245000 }, 'SUPER': { '35': 120000, '60': 175000, '100': 300000 } }
     };
 
+    // --- DATA PRODUK REKOMENDASI/TERLARIS ---
+    const topPicksData = [
+      { name: 'BACCARAT ROUGE 540', category: 'Merah', desc: 'Aroma mewah, manis, dan tahan lama.' },
+      { name: 'CHRISTIAN DIOR SAUVAGE', category: 'Hitam', desc: 'Maskulin, segar, dan berwibawa.' },
+      { name: 'CHANEL NO.5', category: 'Abu-Abu', desc: 'Klasik, elegan, dan ikonik untuk wanita.' },
+    ];
+
     const formatRp = (amount) => {
       return new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', minimumFractionDigits: 0 }).format(amount);
     };
@@ -96,7 +106,7 @@
 
     // --- APLIKASI UTAMA ---
     function App() {
-      const [currentView, setCurrentView] = useState('katalog'); // 'katalog' | 'cart' | 'payment'
+      const [currentView, setCurrentView] = useState('katalog'); 
       
       const [cart, setCart] = useState(() => {
         try {
@@ -244,6 +254,11 @@
         setCurrentView('katalog');
       };
 
+      const handleCSWhatsApp = () => {
+        const waText = `Halo Kak, saya ingin bertanya tentang Jastip Parfum...`;
+        window.open(`https://api.whatsapp.com/send?phone=${ADMIN_WA_PHONE}&text=${encodeURIComponent(waText)}`, '_blank');
+      };
+
       const toggleCategory = (categoryName) => {
         setCollapsedCategories(prev => ({ ...prev, [categoryName]: !prev[categoryName] }));
       };
@@ -261,7 +276,7 @@
       };
 
       return (
-        <div className="min-h-screen relative pb-20">
+        <div className="min-h-screen relative flex flex-col">
           
           {/* HEADER PENGGUNA (Glassmorphism) */}
           <header className="bg-white/80 backdrop-blur-md border-b border-gray-200 sticky top-0 z-40 shadow-sm transition-all">
@@ -278,7 +293,7 @@
               </div>
               
               <div className="flex items-center gap-5">
-                <div className="text-gray-400 text-xs font-semibold tracking-widest hidden md:block border-r border-gray-300 pr-5">CHAKAS_MRL21</div>
+                <div className="text-gray-400 text-xs font-semibold tracking-widest hidden md:block border-r border-gray-300 pr-5">chakas_mrl21</div>
                 <button onClick={() => setCurrentView('cart')} className="relative p-2 text-gray-700 hover:text-purple-600 transition-colors flex items-center">
                   <ShoppingCart size={26} />
                   {totalCartItems > 0 && (
@@ -291,15 +306,14 @@
             </div>
           </header>
 
-          <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-6">
+          <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-6 flex-grow w-full">
             
             {/* ====== TAMPILAN KATALOG ====== */}
             {currentView === 'katalog' && (
-              <div className="animate-in fade-in duration-700">
+              <div className="animate-in fade-in duration-700 pb-16">
                 
                 {/* HERO BANNER SECTION */}
-                <div className="relative w-full bg-gradient-to-r from-purple-900 via-indigo-800 to-slate-900 rounded-3xl p-8 sm:p-12 mb-10 overflow-hidden shadow-2xl flex flex-col justify-center min-h-[220px]">
-                  {/* Efek dekorasi cahaya */}
+                <div className="relative w-full bg-gradient-to-r from-purple-900 via-indigo-800 to-slate-900 rounded-3xl p-8 sm:p-12 mb-12 overflow-hidden shadow-2xl flex flex-col justify-center min-h-[220px]">
                   <div className="absolute top-0 right-0 -mr-16 -mt-16 w-64 h-64 rounded-full bg-purple-500 opacity-20 blur-3xl"></div>
                   <div className="absolute bottom-0 left-0 -ml-16 -mb-16 w-48 h-48 rounded-full bg-blue-500 opacity-20 blur-3xl"></div>
                   
@@ -315,8 +329,8 @@
                 </div>
 
                 {/* SEARCH BAR (Modern Look) */}
-                <div className="max-w-2xl mx-auto relative mb-12 transform -translate-y-16 px-4">
-                  <div className="bg-white rounded-2xl shadow-xl shadow-purple-900/5 flex items-center p-2 border border-gray-100">
+                <div className="max-w-2xl mx-auto relative mb-12 transform -translate-y-16 px-4 z-20">
+                  <div className="bg-white rounded-2xl shadow-xl shadow-purple-900/10 flex items-center p-2 border border-gray-100">
                     <div className="pl-4 text-gray-400">
                       <SearchIcon size={22} />
                     </div>
@@ -335,6 +349,32 @@
                   </div>
                 </div>
 
+                {/* HIGHLIGHT: BEST SELLER SECTION */}
+                {!searchQuery && (
+                  <div className="mb-14">
+                    <div className="flex items-center gap-3 mb-6">
+                      <Star size={24} className="text-amber-500" />
+                      <h3 className="text-2xl font-serif font-bold text-gray-800">Pilihan Terlaris</h3>
+                    </div>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5">
+                      {topPicksData.map((item, index) => (
+                        <div key={index} className="bg-white p-5 rounded-2xl shadow-sm border border-gray-100 hover:shadow-lg hover:border-purple-200 transition-all duration-300 group cursor-pointer" onClick={() => openAddToCartModal(item.name, item.category)}>
+                           <div className="flex justify-between items-start mb-3">
+                              <span className="text-[10px] font-bold text-purple-600 bg-purple-50 px-2 py-1 rounded uppercase tracking-widest">{item.category}</span>
+                              <div className="bg-amber-100 text-amber-600 p-1.5 rounded-full"><Star size={14}/></div>
+                           </div>
+                           <h4 className="font-bold text-gray-900 text-lg mb-1 leading-snug group-hover:text-purple-700 transition-colors">{item.name}</h4>
+                           <p className="text-sm text-gray-500 mb-4">{item.desc}</p>
+                           <div className="flex justify-between items-center pt-4 border-t border-gray-50">
+                              <span className="text-xs font-semibold text-gray-400">Mulai {formatRp(pricingData[item.category]['STANDAR']['35'])}</span>
+                              <span className="text-purple-600 font-bold text-sm flex items-center gap-1 group-hover:translate-x-1 transition-transform">Pesan <ChevronRight size={16}/></span>
+                           </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
                 {filteredCatalog.length === 0 ? (
                   <div className="text-center text-gray-500 py-16 bg-white rounded-3xl shadow-sm mx-4 sm:mx-0 border border-gray-100">
                     <SearchIcon className="mx-auto mb-4 text-gray-200" size={64} />
@@ -342,52 +382,52 @@
                     <p className="text-sm">Parfum yang Anda cari belum tersedia di katalog kami.</p>
                   </div>
                 ) : (
-                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-                    {filteredCatalog.map(({ categoryName, colorClass, textColor, items }) => (
-                      <div key={categoryName} className="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-shadow duration-300 border border-gray-100 flex flex-col group/card">
-                        
-                        {/* Header Kategori (Gradients) */}
-                        <div className={`${colorClass} ${textColor} p-5 relative overflow-hidden`}>
-                           {/* Efek motif pada background header */}
-                           <div className="absolute top-0 right-0 w-full h-full bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-10 mix-blend-overlay"></div>
-                           
-                           <div className="flex justify-between items-center cursor-pointer relative z-10" onClick={() => toggleCategory(categoryName)}>
-                              <div>
-                                <h3 className="font-bold text-xl flex items-center gap-2 drop-shadow-sm">{categoryName}</h3>
-                                <div className="text-xs opacity-90 font-medium mt-1 inline-block bg-black/20 px-2 py-0.5 rounded-md backdrop-blur-sm">
-                                  Mulai {formatRp(pricingData[categoryName]['STANDAR']['35'])}
+                  <div>
+                    <h3 className="text-2xl font-serif font-bold text-gray-800 mb-6 border-b border-gray-200 pb-3">Katalog Lengkap</h3>
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+                      {filteredCatalog.map(({ categoryName, colorClass, textColor, items }) => (
+                        <div key={categoryName} className="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-shadow duration-300 border border-gray-100 flex flex-col group/card">
+                          
+                          <div className={`${colorClass} ${textColor} p-5 relative overflow-hidden`}>
+                             <div className="absolute top-0 right-0 w-full h-full bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-10 mix-blend-overlay"></div>
+                             
+                             <div className="flex justify-between items-center cursor-pointer relative z-10" onClick={() => toggleCategory(categoryName)}>
+                                <div>
+                                  <h3 className="font-bold text-xl flex items-center gap-2 drop-shadow-sm">{categoryName}</h3>
+                                  <div className="text-xs opacity-90 font-medium mt-1 inline-block bg-black/20 px-2 py-0.5 rounded-md backdrop-blur-sm">
+                                    Mulai {formatRp(pricingData[categoryName]['STANDAR']['35'])}
+                                  </div>
                                 </div>
-                              </div>
-                              <div className="flex items-center gap-3">
-                                <button onClick={(e) => { e.stopPropagation(); setPriceInfoCategory(categoryName); }} className="p-2 bg-white/20 hover:bg-white/30 rounded-full transition-colors backdrop-blur-md" title="Lihat Daftar Harga">
-                                  <Info size={20} />
-                                </button>
-                                <div className="bg-white/10 p-1.5 rounded-full transition-transform duration-300">
-                                  {isCategoryOpen(categoryName) ? <ChevronUp size={20} /> : <ChevronDown size={20} />}
+                                <div className="flex items-center gap-3">
+                                  <button onClick={(e) => { e.stopPropagation(); setPriceInfoCategory(categoryName); }} className="p-2 bg-white/20 hover:bg-white/30 rounded-full transition-colors backdrop-blur-md" title="Lihat Daftar Harga">
+                                    <Info size={20} />
+                                  </button>
+                                  <div className="bg-white/10 p-1.5 rounded-full transition-transform duration-300">
+                                    {isCategoryOpen(categoryName) ? <ChevronUp size={20} /> : <ChevronDown size={20} />}
+                                  </div>
                                 </div>
-                              </div>
-                           </div>
-                        </div>
-                        
-                        {/* Daftar Produk (Smooth Hover Effects) */}
-                        {isCategoryOpen(categoryName) && (
-                          <div className="p-4 flex-grow flex flex-col gap-3 bg-slate-50/50 overflow-y-auto max-h-[55vh] scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-transparent">
-                            {items.map((item, index) => (
-                              <button 
-                                key={index} 
-                                onClick={() => openAddToCartModal(item, categoryName)} 
-                                className="text-left w-full bg-white px-4 py-3.5 rounded-xl shadow-sm text-sm font-semibold text-gray-700 transition-all duration-300 border border-gray-100 hover:border-purple-300 hover:shadow-md hover:-translate-y-1 flex justify-between items-center group"
-                              >
-                                <span className="pr-4 leading-snug">{item}</span>
-                                <div className="bg-slate-100 text-slate-400 group-hover:bg-purple-100 group-hover:text-purple-600 p-1.5 rounded-lg transition-colors flex-shrink-0">
-                                  <Plus size={16} />
-                                </div>
-                              </button>
-                            ))}
+                             </div>
                           </div>
-                        )}
-                      </div>
-                    ))}
+                          
+                          {isCategoryOpen(categoryName) && (
+                            <div className="p-4 flex-grow flex flex-col gap-3 bg-slate-50/50 overflow-y-auto max-h-[55vh] scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-transparent">
+                              {items.map((item, index) => (
+                                <button 
+                                  key={index} 
+                                  onClick={() => openAddToCartModal(item, categoryName)} 
+                                  className="text-left w-full bg-white px-4 py-3.5 rounded-xl shadow-sm text-sm font-semibold text-gray-700 transition-all duration-300 border border-gray-100 hover:border-purple-300 hover:shadow-md hover:-translate-y-1 flex justify-between items-center group"
+                                >
+                                  <span className="pr-4 leading-snug">{item}</span>
+                                  <div className="bg-slate-100 text-slate-400 group-hover:bg-purple-100 group-hover:text-purple-600 p-1.5 rounded-lg transition-colors flex-shrink-0">
+                                    <Plus size={16} />
+                                  </div>
+                                </button>
+                              ))}
+                            </div>
+                          )}
+                        </div>
+                      ))}
+                    </div>
                   </div>
                 )}
               </div>
@@ -395,7 +435,7 @@
 
             {/* ====== TAMPILAN KERANJANG (CART) ====== */}
             {currentView === 'cart' && (
-              <div className="max-w-5xl mx-auto animate-in fade-in slide-in-from-bottom-4 duration-500">
+              <div className="max-w-5xl mx-auto animate-in fade-in slide-in-from-bottom-4 duration-500 pb-16">
                 <div className="mb-6">
                   <h2 className="text-3xl font-serif font-bold text-gray-900">Keranjang Belanja</h2>
                   <p className="text-gray-500 text-sm mt-1">Periksa kembali pesanan Anda sebelum melakukan pembayaran.</p>
@@ -490,7 +530,7 @@
 
             {/* ====== TAMPILAN PEMBAYARAN TRANSFER BANK ====== */}
             {currentView === 'payment' && (
-              <div className="max-w-lg mx-auto animate-in slide-in-from-bottom-8 duration-700 mt-4">
+              <div className="max-w-lg mx-auto animate-in slide-in-from-bottom-8 duration-700 mt-4 pb-16">
                 <div className="bg-white rounded-3xl shadow-2xl shadow-blue-900/10 overflow-hidden border border-gray-100">
                    {/* Header Payment */}
                    <div className="bg-gradient-to-br from-blue-600 to-indigo-700 p-8 text-center text-white relative overflow-hidden">
@@ -544,6 +584,44 @@
             )}
 
           </main>
+
+          {/* ====== FOOTER ELEGAN ====== */}
+          <footer className="bg-white border-t border-gray-200 mt-auto">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center md:text-left">
+                <div>
+                  <h2 className="text-2xl font-serif font-bold tracking-wide text-gray-900 mb-4">
+                    <span className="text-purple-600">Jastip</span> Parfum
+                  </h2>
+                  <p className="text-gray-500 text-sm leading-relaxed max-w-xs mx-auto md:mx-0">
+                    Penyedia layanan titip beli parfum original berkualitas standar dan super. Solusi tepat untuk menemukan aroma khas kepribadianmu.
+                  </p>
+                </div>
+                <div>
+                  <h4 className="font-bold text-gray-800 mb-4 uppercase tracking-wider text-sm">Layanan Kami</h4>
+                  <ul className="space-y-2 text-sm text-gray-500">
+                    <li>Katalog Lengkap</li>
+                    <li>Pengiriman Cepat</li>
+                    <li>Jaminan Kualitas</li>
+                    <li>Konsultasi Aroma</li>
+                  </ul>
+                </div>
+                <div>
+                  <h4 className="font-bold text-gray-800 mb-4 uppercase tracking-wider text-sm">Hubungi Kami</h4>
+                  <p className="text-sm text-gray-500 mb-2">WhatsApp: {ADMIN_WA_PHONE}</p>
+                  <p className="text-sm text-gray-500 mb-4">Senin - Sabtu: 09.00 - 17.00 WIB</p>
+                  <div className="flex justify-center md:justify-start gap-4">
+                     <button onClick={handleCSWhatsApp} className="p-2 bg-slate-100 hover:bg-green-100 text-slate-500 hover:text-green-600 rounded-full transition-colors">
+                       <MessageCircle size={20} />
+                     </button>
+                  </div>
+                </div>
+              </div>
+              <div className="border-t border-gray-100 mt-8 pt-8 text-center text-xs text-gray-400">
+                &copy; 2025 Jastip Parfum by chakas_mrl21. All rights reserved.
+              </div>
+            </div>
+          </footer>
 
           {/* ====== MODAL: ADD TO CART ====== */}
           {activeItem && (
@@ -631,9 +709,19 @@
              </div>
           )}
 
+          {/* ====== TOMBOL WHATSAPP MELAYANG (FLOATING CS) ====== */}
+          <button 
+            onClick={handleCSWhatsApp}
+            className="fixed bottom-6 right-6 z-40 bg-green-500 hover:bg-green-600 text-white p-4 rounded-full shadow-xl hover:shadow-2xl transition-all hover:-translate-y-1 flex items-center justify-center group"
+            title="Chat dengan CS"
+          >
+            <MessageCircle size={28} />
+            <span className="max-w-0 overflow-hidden whitespace-nowrap group-hover:max-w-xs transition-all duration-300 ease-in-out font-bold text-sm group-hover:ml-2 group-hover:mr-1">Chat Admin</span>
+          </button>
+
           {/* ====== TOAST NOTIFICATION ====== */}
           {toastMessage && (
-            <div className="fixed bottom-8 left-1/2 transform -translate-x-1/2 bg-gray-900 text-white px-6 py-3.5 rounded-full shadow-2xl z-50 flex items-center gap-3 transition-all duration-300 animate-in slide-in-from-bottom-5">
+            <div className="fixed bottom-24 left-1/2 transform -translate-x-1/2 bg-gray-900 text-white px-6 py-3.5 rounded-full shadow-2xl z-50 flex items-center gap-3 transition-all duration-300 animate-in slide-in-from-bottom-5">
               <CheckCircle2 size={20} className="text-green-400" />
               <span className="text-sm font-semibold tracking-wide">{toastMessage}</span>
             </div>
