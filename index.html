@@ -7,11 +7,9 @@
   
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
-  
   <!-- React & ReactDOM CDN -->
   <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
   <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
-  
   <!-- Babel untuk menerjemahkan JSX di browser -->
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 </head>
@@ -20,6 +18,15 @@
 
   <script type="text/babel">
     const { useState, useEffect } = React;
+
+    // --- URL API DATABASE GOOGLE SHEETS ANDA ---
+    const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyN2tqN1sDF5wrMYzGZHN5COiQKsW2xF2xg9eCFY3Lbz7omHx-Ou9V--gXqD90EAVLCkA/exec";
+    
+    // NOMOR WA ADMIN
+    const ADMIN_WA_PHONE = "6285156447021"; 
+
+    // URL GAMBAR QRIS ANDA DARI GOOGLE DRIVE (Direct Link)
+    const QRIS_IMAGE_URL = "https://drive.google.com/uc?export=view&id=1tSF3Gz4fpcSjYiv2KeYIgeK0GCi8ozJU";
 
     // --- KOMPONEN IKON SVG ---
     const ChevronUp = ({ size = 24, className = "" }) => <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><path d="m18 15-6-6-6 6"/></svg>;
@@ -34,8 +41,10 @@
     const Plus = ({ size = 24, className = "" }) => <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><path d="M5 12h14"/><path d="M12 5v14"/></svg>;
     const Minus = ({ size = 24, className = "" }) => <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><path d="M5 12h14"/></svg>;
     const CheckCircle2 = ({ size = 24, className = "" }) => <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></svg>;
+    const Loader2 = ({ size = 24, className = "" }) => <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={`animate-spin ${className}`}><path d="M21 12a9 9 0 1 1-6.219-8.56"/></svg>;
+    const QrCode = ({ size = 24, className = "" }) => <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><rect width="5" height="5" x="3" y="3" rx="1"/><rect width="5" height="5" x="16" y="3" rx="1"/><rect width="5" height="5" x="3" y="16" rx="1"/><path d="M21 16h-3a2 2 0 0 0-2 2v3"/><path d="M21 21v.01"/><path d="M12 7v3a2 2 0 0 1-2 2H7"/><path d="M3 12h.01"/><path d="M12 3h.01"/><path d="M12 16v.01"/><path d="M16 12h1"/><path d="M21 12v.01"/><path d="M12 21v-1"/></svg>;
 
-    // --- DATA KATALOG ---
+    // --- DATA KATALOG & HARGA ---
     const catalogData = {
       'Abu-Abu': { color: 'bg-gray-500', textColor: 'text-white', items: ['ARIANA GRANDE CANDY LIKE SWEET LIMITED EDITION', 'BAHAR THE SPIRIT OF DUBAI UNISEX', 'BODY SHOP WHITE MUSK', 'BVLGARI AQUA', 'BVLGARI AQUA AMARA', 'BVLGARI AQUA MARINE', 'BVLGARI RAIN MAN ESSENSE MAN', 'CENDANA', 'CH 212 HEROES 2021', 'CH 212 MAN', 'CH 212 SEXY MAN', 'CHANEL NO.5', 'CHRISTIAN DIOR SAUVAGE', 'CREED AVENTUS', 'DE MARLY LAYTON UNISEX', 'Dior Sauvage New Edition 2025', 'ERMENEGILDO ZEGNA ESSENCE FLORENTINE IRIS', 'ESTEE LAUDER MODERN MUSE LE ROUGE', 'GIORGIO ARMANI ACQUADIGIO ABSOLUTE', 'GUCCI BLOOM INTENSE', 'JAGUAR PACE', 'JPG WOMAN', 'KILLIAN MUSK OUD', 'LOUIS VUITTON CALIFORNIA DREAM UNISEX', 'LOUIS VUITTON COEUR BATTANT', 'LOUIS VUITTON FLEUR DE DESSERT UNISEX', 'LOUIS VUITTON PASIFIC CHILL UNISEX', 'MAISON MARGIELA ON A DATE 2022', 'Maison Margiella By The Fireplace', 'MANCERA AMBER FEVER', 'MANGO ADORABLY', 'MNG CUT FOR WOMAN', 'MONTALE PARIS INTENSE', 'MONTALE ROSE MUSK', 'Reef 31', 'ROJA DOVE ELYSIUM COLOGNE POUR HOME MAN', 'SALVATORE FERRAGMO INTENSE LEATHER', 'TAMBURINS CHAMO 2022', 'TOM FORD FUCKING FABULOUS', 'TOMFORD NOIR EXTREM PARFUME', 'Waffle Vanilla Ice Cream', 'XERJOF (ALEXANDRIA II) UNISEX', 'YSL KOUROS'] },
       'Biru Muda': { color: 'bg-sky-500', textColor: 'text-white', items: ['ABERCROMBIE & FITCH FIRST INSTINCT UNISEX', 'AIGNER IN LEATHER MAN', 'ANNA SUI FLIGHT OF FANCY', 'ANNICK GOUTAL PETITE CHERIE', 'ARIANA GRANDE CLOUD PINK', 'ARMANI TERRA DIGIO', 'AZZARO THE MOST WANTED', 'BATH & BODY WORKS BE JOYFULL', 'BATH & BODY WORKS MAD ABOUT YOU', 'BATH & BODY WORKS BEAUTIFUL DAY', 'BURBERRY HER LONDON DREAM', 'BVLGARI AQUA ATLANTIQUE', 'BVLGARI EXTREME', 'BVLGARI JASMINE', 'BVLGARI OMNIA BY MARY KATRANZOU', 'BVLGARI ROSE ESSENTIAL', 'BY REDO GIPSY WATER UNISEX', 'CH 212 VIP MEN WINS', 'CH KINGS', 'CHACAREL YES IM PINK FIRST', 'CHRISTIAN DIOR DUNE MAN', 'CHRISTIAN DIOR MISS DIOR BLOOMING BOUQUET', 'CHRISTIAN DIOR MISS DIOR ROSE N ROSES', 'CHRISTIAN DIOR TOBACOLOR', 'CK ONE 1994', 'D&G THE ONE GENTLEMAN', 'DAHNAL OOD SUPER', 'DE MARLEY DELINA', 'DIOR BY DIOR BONNE ETOILLE BABY UNISEX', 'DIOR HOLLY PEONY WOMAN', 'DIPTYQUE DO SON EDP UNISEX', 'DIPTYQUE TAM DAO EDP UNISEX', 'DUNHILL SIGNATURE COLLECTION BRITISH LEATHER', 'DYPTIQUE FEU DE BOIS', 'ELLIE SAAB 2018 GIRL OF NOW SHINE', 'ESCADA CANDY LOVE', 'ESCADA SORBERTO ROSO', 'GIORGIO ARMANI MY WAY NECTAR', 'GIORGIO ARMANI SI INTENSE 2021', 'GIORGIO ARMANI THE YULONG UNISEX', 'GIORGIO EMPORIO ARMANI STRONG WITH YOU AMBER UNISEX', 'GUCCI BAMBOO', 'HUGO BOSS BOTTLED', 'HUGO BOSS ENERGIZE', 'HUGO BOSS IN MOTION ELECTRIC', 'JHON VARVATOS ARTISAN', 'JLO MIAMI GLOW', 'JO MALONE BRONZE WOOD&LEATHER COLOGNE INTENS', 'JO MALONE RED HIBISCUS', 'JO MALONE ROSE & MAGNOLIA COLOGNE 2024 WOMAN', 'JPG SCANDAL BY NIGHT', 'KILLIAN PRINCESS WOMAN', 'LACOSTE MATCH POINT MEN', 'LANCOME IDOLE', 'LOUIS VUITTON DANCING BLOSSOM UNISEX', 'LOUIS VUITTON ETOILE FILANTE WOMAN', 'LOUIS VUITTON ON THE BEACH UNISEX', 'LOUIS VUITTON SYMPHONY UNISEX', 'MAISON FRANCIS KURKDIJAN FLUIDITY GENTLE GOLD UNISEX', 'MAISON MARGIELA JAZZ CLUB MAN', 'MARC JACOB PERFECT 2020', 'MERCEDES SIGN', 'MONTBLANC EXPLORE PLATINUM', 'MOSCHINO TOY 2 PEARL 2023', 'NADINE WINATA', 'Nagita Slavina', 'PACO RABANNE FAME', 'PACO RABANNE OLYMPEA SOLAR 2022', 'PENHALIGON ELLENSIA', "PENHALIGON'S BABYLON 2019", 'PERY ELIS 360 WOMAN', 'PRADA INFUSION THE MANDARIN', 'RALPH LAUREN POLO DOUBLE BLACK', 'RALPH LAUREN POLO SAFARI', 'ROJA DOVE ELYSIUM POUR HOMME COLOGNE 2017', 'Rose Noir by Ahmed Al Maghribi', 'SALVATORE FERAGAMO MAN', 'SALVATORE FERRAGAMO GIARDINI DI SETA UNISEX', 'SALVATORE FERRAGAMO SIGNORINA', 'SALVATORE FERRAGAMO UOMO URBAN FEEL', 'SANTAL 33 BY LE LABO', 'SEMIRAMIS', 'SERIBU BUNGA', 'TOM FORD OMBRE LEATHER PARFUM', 'VALENTINO ABSULO', 'VERSACE EROS MAN', "VICTORIA'S SECRET ANGEL GOLD", "VICTORIA'S SECRET CANDY NOIR TEASE", "VICTORIA'S SECRET EAU SO SEXY", 'Waffle Vanilla Caramel', 'YSL MYSELF', 'YSL TUXEDO'] },
@@ -45,7 +54,6 @@
       'Ungu': { color: 'bg-gradient-to-b from-purple-600 to-purple-500', textColor: 'text-white', items: ['AVRIL LAVIGNE FORBIDDEN ROSE', 'BACCARAT ROUGE 540 2015', 'BAHAR SPIRIT OF DUBAI', 'BLAMAGE BY NASOMATTO UNISEX', 'Diptyque Eau Capitale', 'LOUIS VUITON SABLES ROSES', 'Sauvage Her Blossom', 'Sauvage Spicy Blue'] }
     };
 
-    // --- DATA HARGA (Orange disamakan dengan Merah) ---
     const pricingData = {
       'Merah': { 'STANDAR': { '35': 55000, '60': 80000, '100': 130000 }, 'SUPER': { '35': 65000, '60': 93000, '100': 150000 } },
       'Orange': { 'STANDAR': { '35': 55000, '60': 80000, '100': 130000 }, 'SUPER': { '35': 65000, '60': 93000, '100': 150000 } },
@@ -55,45 +63,46 @@
       'Hitam': { 'STANDAR': { '35': 95000, '60': 150000, '100': 245000 }, 'SUPER': { '35': 120000, '60': 175000, '100': 300000 } }
     };
 
-    // Helper: Format Uang
     const formatRp = (amount) => {
       return new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', minimumFractionDigits: 0 }).format(amount);
     };
 
+    const generateOrderId = () => {
+      return 'ORD-' + Math.random().toString(36).substr(2, 4).toUpperCase();
+    };
+
     // --- APLIKASI UTAMA ---
     function App() {
-      const [currentView, setCurrentView] = useState('katalog'); // 'katalog' | 'cart'
+      const [currentView, setCurrentView] = useState('katalog'); // 'katalog' | 'cart' | 'payment'
       
-      // Mengambil Keranjang dari Local Storage saat pertama dimuat
       const [cart, setCart] = useState(() => {
         try {
           const savedCart = localStorage.getItem('parfumCart');
           return savedCart ? JSON.parse(savedCart) : [];
-        } catch (error) {
-          console.error("Gagal mengambil data dari Local Storage", error);
-          return [];
-        }
+        } catch (error) { return []; }
       });
 
-      // Simpan Keranjang ke Local Storage setiap kali ada perubahan
       useEffect(() => {
         localStorage.setItem('parfumCart', JSON.stringify(cart));
       }, [cart]);
 
-      // States lainnya
+      // States
       const [activeItem, setActiveItem] = useState(null);
       const [priceInfoCategory, setPriceInfoCategory] = useState(null);
       const [formConfig, setFormConfig] = useState({ ml: '', kualitas: '' });
+      
+      // Checkout States
       const [noHp, setNoHp] = useState('');
       const [phoneError, setPhoneError] = useState('');
-      const [toastMessage, setToastMessage] = useState('');
+      const [isCheckingOut, setIsCheckingOut] = useState(false);
+      const [orderId, setOrderId] = useState('');
       
+      const [toastMessage, setToastMessage] = useState('');
       const [searchQuery, setSearchQuery] = useState('');
       const [collapsedCategories, setCollapsedCategories] = useState({
         'Abu-Abu': true, 'Biru Muda': true, 'Hitam': true
       });
 
-      // --- LOGIKA KERANJANG ---
       const totalCartItems = cart.reduce((sum, item) => sum + item.quantity, 0);
       const totalCartPrice = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
 
@@ -104,20 +113,11 @@
 
       const handleAddToCart = () => {
         if (!formConfig.ml || !formConfig.kualitas) return;
-        
         const price = pricingData[activeItem.category][formConfig.kualitas][formConfig.ml];
-        const newItem = {
-          ...activeItem,
-          ml: formConfig.ml,
-          kualitas: formConfig.kualitas,
-          price: price,
-        };
+        const newItem = { ...activeItem, ml: formConfig.ml, kualitas: formConfig.kualitas, price: price };
 
         setCart(prevCart => {
-          const existingItemIndex = prevCart.findIndex(i => 
-            i.name === newItem.name && i.ml === newItem.ml && i.kualitas === newItem.kualitas
-          );
-
+          const existingItemIndex = prevCart.findIndex(i => i.name === newItem.name && i.ml === newItem.ml && i.kualitas === newItem.kualitas);
           if (existingItemIndex >= 0) {
             const newCart = [...prevCart];
             newCart[existingItemIndex].quantity += 1;
@@ -127,20 +127,16 @@
           }
         });
 
-        // Tampilkan Notifikasi Toast
         setToastMessage(`${activeItem.name} ditambahkan!`);
-        setTimeout(() => setToastMessage(''), 3000); // Hilang setelah 3 detik
-
-        setActiveItem(null); // Tutup modal
+        setTimeout(() => setToastMessage(''), 3000);
+        setActiveItem(null); 
       };
 
       const updateQuantity = (index, delta) => {
         setCart(prev => {
           const newCart = [...prev];
           newCart[index].quantity += delta;
-          if (newCart[index].quantity <= 0) {
-            newCart.splice(index, 1);
-          }
+          if (newCart[index].quantity <= 0) newCart.splice(index, 1);
           return newCart;
         });
       };
@@ -153,13 +149,9 @@
         });
       };
 
-      // --- LOGIKA VALIDASI WA & CHECKOUT ---
       const handlePhoneChange = (e) => {
-        // Hanya izinkan angka masuk
         const value = e.target.value.replace(/\D/g, ''); 
         setNoHp(value);
-        
-        // Validasi panjang angka (standar Indonesia: 10 sampai 14 digit)
         if (value.length > 0 && (value.length < 10 || value.length > 14)) {
           setPhoneError('Nomor HP tidak valid (harus 10-14 angka)');
         } else {
@@ -167,33 +159,54 @@
         }
       };
 
-      const handleCheckout = (e) => {
+      const handleCheckout = async (e) => {
         e.preventDefault();
+        if (cart.length === 0 || phoneError || noHp.length < 10) return;
         
-        // Mencegah checkout jika keranjang kosong atau HP tidak valid
-        if (cart.length === 0 || phoneError || noHp.length < 10) {
-           if (noHp.length < 10) setPhoneError('Mohon isi Nomor HP yang valid!');
-           return;
-        }
+        setIsCheckingOut(true);
+        const newOrderId = generateOrderId();
+        setOrderId(newOrderId);
         
-        const adminPhone = "6285156447021"; // GANTI DENGAN NOMOR WA ADMIN
-        
-        let waText = `Halo Kak, saya mau pesan parfum:\n\n`;
-        cart.forEach((item, index) => {
-          const itemTotal = item.price * item.quantity;
-          waText += `${index + 1}. *${item.name}* (${item.category})\n`;
-          waText += `   Ukuran: ${item.ml} ml | Kualitas: ${item.kualitas}\n`;
-          waText += `   Jumlah: ${item.quantity} | Harga: ${formatRp(itemTotal)}\n\n`;
+        let itemsDetailsStr = "";
+        cart.forEach((item, idx) => {
+           itemsDetailsStr += `${idx+1}. ${item.name} (${item.ml}ml-${item.kualitas}) x${item.quantity}\n`;
         });
-        
-        waText += `*Total Tagihan: ${formatRp(totalCartPrice)}*\n`;
-        waText += `Nomor WA: ${noHp}\n\nMohon proses pesanan saya ya. Terima kasih!`;
-        
-        const waUrl = `https://api.whatsapp.com/send?phone=${adminPhone}&text=${encodeURIComponent(waText)}`;
-        window.open(waUrl, '_blank');
+
+        const formData = new URLSearchParams();
+        formData.append('orderId', newOrderId);
+        formData.append('noHp', noHp);
+        formData.append('totalPrice', formatRp(totalCartPrice));
+        formData.append('itemsDetails', itemsDetailsStr);
+
+        try {
+          await fetch(GOOGLE_SCRIPT_URL, {
+            method: 'POST',
+            body: formData,
+            mode: 'no-cors'
+          });
+          setIsCheckingOut(false);
+          setCurrentView('payment'); 
+        } catch (error) {
+          console.error("Gagal mengirim pesanan", error);
+          alert("Gagal terhubung ke database. Coba lagi.");
+          setIsCheckingOut(false);
+        }
       };
 
-      // --- LOGIKA UI KATALOG ---
+      const handleConfirmPayment = () => {
+        let waText = `Halo Kak, saya sudah melakukan pembayaran pesanan Parfum.\n\n`;
+        waText += `*Order ID:* ${orderId}\n`;
+        waText += `*Total Transfer:* ${formatRp(totalCartPrice)}\n\n`;
+        waText += `Ini bukti transfer saya: (Silakan lampirkan gambar)`;
+        
+        const waUrl = `https://api.whatsapp.com/send?phone=${ADMIN_WA_PHONE}&text=${encodeURIComponent(waText)}`;
+        window.open(waUrl, '_blank');
+        
+        setCart([]);
+        localStorage.removeItem('parfumCart');
+        setCurrentView('katalog');
+      };
+
       const toggleCategory = (categoryName) => {
         setCollapsedCategories(prev => ({ ...prev, [categoryName]: !prev[categoryName] }));
       };
@@ -210,19 +223,13 @@
         return !collapsedCategories[catName];
       };
 
-      const getLowestPrice = (catName) => {
-        if(!pricingData[catName]) return null;
-        return pricingData[catName]['STANDAR']['35'];
-      };
-
       return (
         <div className="min-h-screen font-sans text-gray-800 pb-12 relative">
           
-          {/* HEADER PENGGUNA */}
           <header className="bg-purple-700 text-white shadow-md sticky top-0 z-30">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
               <div className="flex items-center gap-4">
-                {currentView === 'cart' && (
+                {(currentView === 'cart' || currentView === 'payment') && (
                   <button onClick={() => setCurrentView('katalog')} className="bg-purple-500 hover:bg-purple-600 text-white px-3 py-2 rounded-full text-sm font-medium transition-colors border border-purple-400 shadow-sm flex items-center gap-1">
                     <ChevronLeft size={18} />
                     <span className="hidden sm:inline">Kembali</span>
@@ -233,12 +240,7 @@
               
               <div className="flex items-center gap-4">
                 <div className="text-purple-300 text-sm font-medium tracking-widest hidden md:block border-r border-purple-500 pr-4">CHAKAS_MRL21</div>
-                
-                {/* Tombol Keranjang */}
-                <button 
-                  onClick={() => setCurrentView('cart')}
-                  className="relative p-2 hover:bg-purple-600 rounded-full transition-colors flex items-center"
-                >
+                <button onClick={() => setCurrentView('cart')} className="relative p-2 hover:bg-purple-600 rounded-full transition-colors flex items-center">
                   <ShoppingCart size={24} />
                   {totalCartItems > 0 && (
                     <span className="absolute top-0 right-0 bg-red-500 text-white text-[10px] font-bold w-5 h-5 flex items-center justify-center rounded-full border-2 border-purple-700">
@@ -251,15 +253,13 @@
           </header>
 
           <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-8">
-            {currentView === 'katalog' ? (
-              
-              /* ====== TAMPILAN KATALOG ====== */
+            
+            {currentView === 'katalog' && (
               <div className="animate-in fade-in duration-500">
                 <div className="text-center mb-8">
                   <h2 className="text-3xl font-bold text-gray-800 mb-2">Pilih Kategori Aroma</h2>
                   <div className="w-16 h-1 bg-purple-600 mx-auto rounded mb-8"></div>
                   
-                  {/* Search Bar */}
                   <div className="max-w-md mx-auto relative px-4 sm:px-0 mb-6">
                     <div className="absolute inset-y-0 left-4 sm:left-0 pl-3 flex items-center pointer-events-none">
                       <SearchIcon className="text-gray-400" size={20} />
@@ -283,26 +283,14 @@
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                     {filteredCatalog.map(({ categoryName, color, textColor, items }) => (
                       <div key={categoryName} className="bg-white rounded-xl overflow-hidden shadow-md flex flex-col border border-gray-100">
-                        
-                        {/* Header Kategori */}
                         <div className={`${color} ${textColor} p-4 relative`}>
                            <div className="flex justify-between items-center cursor-pointer" onClick={() => toggleCategory(categoryName)}>
                               <div>
-                                <h3 className="font-bold text-lg flex items-center gap-2">
-                                  {categoryName} 
-                                </h3>
-                                {/* Label Harga Mulai */}
-                                <div className="text-xs opacity-90 font-medium mt-0.5">
-                                  Mulai {formatRp(getLowestPrice(categoryName))}
-                                </div>
+                                <h3 className="font-bold text-lg flex items-center gap-2">{categoryName}</h3>
+                                <div className="text-xs opacity-90 font-medium mt-0.5">Mulai {formatRp(pricingData[categoryName]['STANDAR']['35'])}</div>
                               </div>
                               <div className="flex items-center gap-3">
-                                {/* Tombol Tooltip Info Harga */}
-                                <button 
-                                  onClick={(e) => { e.stopPropagation(); setPriceInfoCategory(categoryName); }}
-                                  className="p-1.5 bg-white/20 hover:bg-white/30 rounded-full transition-colors backdrop-blur-sm"
-                                  title="Lihat Daftar Harga"
-                                >
+                                <button onClick={(e) => { e.stopPropagation(); setPriceInfoCategory(categoryName); }} className="p-1.5 bg-white/20 hover:bg-white/30 rounded-full transition-colors backdrop-blur-sm" title="Lihat Daftar Harga">
                                   <Info size={18} />
                                 </button>
                                 {isCategoryOpen(categoryName) ? <ChevronUp size={22} /> : <ChevronDown size={22} />}
@@ -310,15 +298,10 @@
                            </div>
                         </div>
                         
-                        {/* List Parfum */}
                         {isCategoryOpen(categoryName) && (
                           <div className="p-3 flex-grow flex flex-col gap-2 bg-gray-50 overflow-y-auto max-h-[60vh]">
                             {items.map((item, index) => (
-                              <button 
-                                key={index} 
-                                onClick={() => openAddToCartModal(item, categoryName)} 
-                                className="text-left w-full bg-white p-3 md:p-4 rounded-lg shadow-sm text-sm font-medium text-gray-700 hover:bg-purple-50 hover:text-purple-700 hover:shadow-md transition-all duration-200 border border-gray-100 hover:border-purple-200 flex justify-between items-center group uppercase"
-                              >
+                              <button key={index} onClick={() => openAddToCartModal(item, categoryName)} className="text-left w-full bg-white p-3 md:p-4 rounded-lg shadow-sm text-sm font-medium text-gray-700 hover:bg-purple-50 hover:text-purple-700 hover:shadow-md transition-all duration-200 border border-gray-100 hover:border-purple-200 flex justify-between items-center group uppercase">
                                 <span className="pr-4">{item}</span>
                                 <Plus size={18} className="text-gray-300 group-hover:text-purple-500 flex-shrink-0" />
                               </button>
@@ -330,10 +313,9 @@
                   </div>
                 )}
               </div>
+            )}
 
-            ) : (
-
-              /* ====== TAMPILAN KERANJANG (CART) ====== */
+            {currentView === 'cart' && (
               <div className="max-w-4xl mx-auto animate-in fade-in duration-300">
                 <div className="bg-white rounded-2xl shadow-lg overflow-hidden border border-gray-100">
                   <div className="bg-purple-600 p-6 text-white flex items-center gap-3">
@@ -345,14 +327,10 @@
                     <div className="p-12 text-center text-gray-500">
                       <ShoppingBag size={64} className="mx-auto mb-4 text-gray-300" />
                       <h3 className="text-xl font-bold text-gray-700 mb-2">Keranjang Anda masih kosong</h3>
-                      <p className="mb-6">Silakan pilih parfum dari katalog terlebih dahulu.</p>
-                      <button onClick={() => setCurrentView('katalog')} className="bg-purple-600 hover:bg-purple-700 text-white font-semibold py-2 px-6 rounded-full transition-colors">
-                        Lihat Katalog
-                      </button>
+                      <button onClick={() => setCurrentView('katalog')} className="mt-4 bg-purple-600 hover:bg-purple-700 text-white font-semibold py-2 px-6 rounded-full transition-colors">Lihat Katalog</button>
                     </div>
                   ) : (
                     <div className="flex flex-col md:flex-row">
-                      {/* List Item Keranjang */}
                       <div className="flex-1 p-6 md:border-r border-gray-100">
                         <h3 className="font-bold text-gray-800 mb-4 border-b pb-2">Daftar Pesanan ({totalCartItems} Item)</h3>
                         <div className="space-y-4 max-h-[50vh] overflow-y-auto pr-2">
@@ -360,19 +338,11 @@
                             <div key={index} className="flex gap-4 p-4 bg-gray-50 rounded-xl border border-gray-100 relative group">
                               <div className="flex-1">
                                 <h4 className="font-bold text-gray-800 text-sm md:text-base uppercase leading-tight mb-1">{item.name}</h4>
-                                <div className="text-xs text-gray-500 mb-2 font-medium">
-                                  Kat: {item.category} • {item.ml}ml • {item.kualitas}
-                                </div>
-                                <div className="text-purple-700 font-bold text-sm">
-                                  {formatRp(item.price)} <span className="text-gray-400 font-normal text-xs">/ botol</span>
-                                </div>
+                                <div className="text-xs text-gray-500 mb-2 font-medium">Kat: {item.category} • {item.ml}ml • {item.kualitas}</div>
+                                <div className="text-purple-700 font-bold text-sm">{formatRp(item.price)} <span className="text-gray-400 font-normal text-xs">/ botol</span></div>
                               </div>
-                              
-                              {/* Kontrol Kuantitas */}
                               <div className="flex flex-col items-end justify-between">
-                                <button onClick={() => removeItem(index)} className="text-gray-400 hover:text-red-500 p-1 mb-2">
-                                  <Trash2 size={18} />
-                                </button>
+                                <button onClick={() => removeItem(index)} className="text-gray-400 hover:text-red-500 p-1 mb-2"><Trash2 size={18} /></button>
                                 <div className="flex items-center bg-white border border-gray-200 rounded-lg shadow-sm">
                                   <button onClick={() => updateQuantity(index, -1)} className="p-1.5 hover:bg-gray-100 text-gray-600 rounded-l-lg"><Minus size={16}/></button>
                                   <span className="w-8 text-center text-sm font-semibold">{item.quantity}</span>
@@ -384,10 +354,8 @@
                         </div>
                       </div>
 
-                      {/* Ringkasan & Form Checkout */}
                       <div className="w-full md:w-[340px] p-6 bg-gray-50/50">
                         <h3 className="font-bold text-gray-800 mb-4 border-b pb-2">Ringkasan</h3>
-                        
                         <div className="flex justify-between items-center mb-6">
                           <span className="text-gray-600">Total Harga:</span>
                           <span className="text-xl font-bold text-purple-700">{formatRp(totalCartPrice)}</span>
@@ -396,24 +364,12 @@
                         <form onSubmit={handleCheckout} className="space-y-4">
                           <div>
                             <label className="block text-xs font-semibold text-gray-700 mb-1">Nomor WA Anda (diawali 08/628) <span className="text-red-500">*</span></label>
-                            <input 
-                              type="tel" 
-                              required 
-                              placeholder="081234567890" 
-                              value={noHp} 
-                              onChange={handlePhoneChange} 
-                              className={`w-full bg-white border ${phoneError ? 'border-red-500' : 'border-gray-300'} text-gray-800 rounded-lg p-2.5 focus:outline-none focus:ring-2 focus:ring-purple-500 text-sm shadow-sm`}
-                            />
+                            <input type="tel" required placeholder="081234567890" value={noHp} onChange={handlePhoneChange} className={`w-full bg-white border ${phoneError ? 'border-red-500' : 'border-gray-300'} text-gray-800 rounded-lg p-2.5 focus:outline-none focus:ring-2 focus:ring-purple-500 text-sm shadow-sm`} />
                             {phoneError && <p className="text-red-500 text-xs mt-1">{phoneError}</p>}
                           </div>
                           
-                          <button 
-                            type="submit" 
-                            disabled={!!phoneError || noHp.length < 10}
-                            className={`w-full font-bold py-3 px-4 rounded-xl shadow-md flex justify-center items-center gap-2 transition-all 
-                              ${(phoneError || noHp.length < 10) ? 'bg-gray-300 text-gray-500 cursor-not-allowed shadow-none' : 'bg-green-500 hover:bg-green-600 text-white'}`}
-                          >
-                            Pesan via WhatsApp
+                          <button type="submit" disabled={!!phoneError || noHp.length < 10 || isCheckingOut} className={`w-full font-bold py-3 px-4 rounded-xl shadow-md flex justify-center items-center gap-2 transition-all ${(phoneError || noHp.length < 10 || isCheckingOut) ? 'bg-gray-300 text-gray-500 cursor-not-allowed shadow-none' : 'bg-green-500 hover:bg-green-600 text-white'}`}>
+                            {isCheckingOut ? <><Loader2 size={18} /> Menyimpan ke Sistem...</> : 'Proses Pesanan & Bayar'}
                           </button>
                         </form>
                       </div>
@@ -422,9 +378,42 @@
                 </div>
               </div>
             )}
+
+            {currentView === 'payment' && (
+              <div className="max-w-md mx-auto animate-in slide-in-from-bottom-8 duration-500">
+                <div className="bg-white rounded-2xl shadow-xl overflow-hidden border border-gray-100 text-center p-8">
+                   <div className="w-16 h-16 bg-green-100 text-green-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                      <QrCode size={32} />
+                   </div>
+                   <h2 className="text-2xl font-bold text-gray-800 mb-1">Pembayaran QRIS</h2>
+                   <p className="text-gray-500 text-sm mb-6">Pesanan Anda telah tercatat di sistem kami.</p>
+
+                   <div className="bg-gray-50 p-4 rounded-xl border border-dashed border-gray-300 mb-6">
+                      <p className="text-sm text-gray-600 mb-1">Order ID:</p>
+                      <p className="text-lg font-bold text-gray-800 tracking-wider mb-3">{orderId}</p>
+                      <p className="text-sm text-gray-600 mb-1">Total yang harus dibayar:</p>
+                      <p className="text-3xl font-extrabold text-purple-700">{formatRp(totalCartPrice)}</p>
+                   </div>
+
+                   {/* GAMBAR QRIS DARI GOOGLE DRIVE */}
+                   <div className="border-4 border-purple-100 rounded-xl p-4 inline-block mb-6 shadow-sm">
+                      <img src={QRIS_IMAGE_URL} alt="Scan QRIS" className="w-48 h-48 object-contain mx-auto" />
+                   </div>
+
+                   <div className="space-y-3">
+                      <button onClick={handleConfirmPayment} className="w-full bg-green-500 hover:bg-green-600 text-white font-bold py-3.5 px-4 rounded-xl transition-all shadow-md hover:shadow-lg flex items-center justify-center gap-2 text-lg">
+                        <CheckCircle2 size={20} /> Saya Sudah Bayar
+                      </button>
+                      <button onClick={() => {setCart([]); localStorage.removeItem('parfumCart'); setCurrentView('katalog');}} className="w-full bg-white border border-gray-300 text-gray-600 font-semibold py-3 px-4 rounded-xl hover:bg-gray-50 transition-colors">
+                        Batal / Nanti Saja
+                      </button>
+                   </div>
+                </div>
+              </div>
+            )}
+
           </main>
 
-          {/* ====== MODAL: ADD TO CART ====== */}
           {activeItem && (
             <div className="fixed inset-0 bg-black/60 z-50 flex items-center justify-center p-4 backdrop-blur-sm animate-in fade-in duration-200">
               <div className="bg-white rounded-2xl shadow-xl w-full max-w-md overflow-hidden transform scale-100">
@@ -432,59 +421,40 @@
                   <h3 className="font-bold text-gray-800 flex items-center gap-2"><ShoppingCart size={20} className="text-purple-600"/> Konfigurasi Parfum</h3>
                   <button onClick={() => setActiveItem(null)} className="text-gray-400 hover:text-gray-600 bg-gray-200/50 hover:bg-gray-200 p-1.5 rounded-full"><X size={20}/></button>
                 </div>
-                
                 <div className="p-6">
                   <div className="mb-5 p-4 bg-purple-50 rounded-xl border border-purple-100">
                     <span className="inline-block px-2 py-1 bg-purple-200 text-purple-800 text-[10px] font-bold rounded mb-2 uppercase">{activeItem.category}</span>
                     <h4 className="font-bold text-purple-900 uppercase leading-snug">{activeItem.name}</h4>
                   </div>
-
                   <div className="space-y-4">
                     <div>
                       <label className="block text-sm font-semibold text-gray-700 mb-1.5">Ukuran (ML) <span className="text-red-500">*</span></label>
                       <select required value={formConfig.ml} onChange={(e) => setFormConfig({...formConfig, ml: e.target.value})} className="w-full bg-gray-50 border border-gray-300 rounded-lg p-3 focus:ring-2 focus:ring-purple-500 focus:outline-none">
-                        <option value="" disabled>Pilih Ukuran</option>
-                        <option value="35">35 ML</option>
-                        <option value="60">60 ML</option>
-                        <option value="100">100 ML</option>
+                        <option value="" disabled>Pilih Ukuran</option><option value="35">35 ML</option><option value="60">60 ML</option><option value="100">100 ML</option>
                       </select>
                     </div>
                     <div>
                       <label className="block text-sm font-semibold text-gray-700 mb-1.5">Kualitas <span className="text-red-500">*</span></label>
                       <select required value={formConfig.kualitas} onChange={(e) => setFormConfig({...formConfig, kualitas: e.target.value})} className="w-full bg-gray-50 border border-gray-300 rounded-lg p-3 focus:ring-2 focus:ring-purple-500 focus:outline-none">
-                        <option value="" disabled>Pilih Kualitas</option>
-                        <option value="STANDAR">STANDAR</option>
-                        <option value="SUPER">SUPER</option>
+                        <option value="" disabled>Pilih Kualitas</option><option value="STANDAR">STANDAR</option><option value="SUPER">SUPER</option>
                       </select>
                     </div>
-
-                    {/* Harga Preview */}
                     {formConfig.ml && formConfig.kualitas && (
                        <div className="mt-4 flex justify-between items-end border-t border-dashed border-gray-200 pt-4">
                           <span className="text-gray-500 text-sm font-medium">Harga per botol:</span>
-                          <span className="text-2xl font-bold text-purple-700">
-                             {formatRp(pricingData[activeItem.category][formConfig.kualitas][formConfig.ml])}
-                          </span>
+                          <span className="text-2xl font-bold text-purple-700">{formatRp(pricingData[activeItem.category][formConfig.kualitas][formConfig.ml])}</span>
                        </div>
                     )}
                   </div>
                 </div>
-
                 <div className="p-5 border-t border-gray-100 bg-gray-50 flex gap-3">
                   <button onClick={() => setActiveItem(null)} className="flex-1 py-3 px-4 bg-white border border-gray-300 rounded-xl text-gray-700 font-semibold hover:bg-gray-50">Batal</button>
-                  <button 
-                    onClick={handleAddToCart}
-                    disabled={!formConfig.ml || !formConfig.kualitas}
-                    className={`flex-1 py-3 px-4 rounded-xl font-bold text-white shadow-md transition-all ${(!formConfig.ml || !formConfig.kualitas) ? 'bg-purple-300 cursor-not-allowed shadow-none' : 'bg-purple-600 hover:bg-purple-700 hover:shadow-lg'}`}
-                  >
-                    Tambah ke Keranjang
-                  </button>
+                  <button onClick={handleAddToCart} disabled={!formConfig.ml || !formConfig.kualitas} className={`flex-1 py-3 px-4 rounded-xl font-bold text-white shadow-md transition-all ${(!formConfig.ml || !formConfig.kualitas) ? 'bg-purple-300 cursor-not-allowed shadow-none' : 'bg-purple-600 hover:bg-purple-700 hover:shadow-lg'}`}>Tambah ke Keranjang</button>
                 </div>
               </div>
             </div>
           )}
 
-          {/* ====== MODAL: TOOLTIP INFO HARGA ====== */}
           {priceInfoCategory && (
              <div className="fixed inset-0 bg-black/60 z-50 flex items-center justify-center p-4 backdrop-blur-sm animate-in fade-in duration-200" onClick={() => setPriceInfoCategory(null)}>
                <div className="bg-white rounded-2xl shadow-2xl w-full max-w-sm overflow-hidden" onClick={e => e.stopPropagation()}>
@@ -514,7 +484,6 @@
              </div>
           )}
 
-          {/* ====== TOAST NOTIFICATION ====== */}
           {toastMessage && (
             <div className="fixed bottom-6 left-1/2 transform -translate-x-1/2 bg-gray-800 text-white px-6 py-3 rounded-full shadow-2xl z-50 flex items-center gap-2 transition-all duration-300 animate-in slide-in-from-bottom-5">
               <CheckCircle2 size={20} className="text-green-400" />
@@ -526,10 +495,8 @@
       );
     }
 
-    // --- RENDER APLIKASI ---
     const root = ReactDOM.createRoot(document.getElementById('root'));
     root.render(<App />);
   </script>
 </body>
 </html>
-
